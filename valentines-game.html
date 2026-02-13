@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch My Love 💕</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <div class="game-header">
+            <h1 class="game-title">Catch My Love! 💝</h1>
+            <p class="game-subtitle">Move your basket to catch all the falling hearts!</p>
+        </div>
+
+        <!-- Love Meter -->
+        <div class="love-meter-container">
+            <div class="love-meter-label">Love Meter</div>
+            <div class="love-meter-bar">
+                <div class="love-meter-fill" id="loveMeterFill">
+                    <span class="love-meter-text" id="loveMeterText">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Canvas -->
+        <div class="game-canvas" id="gameCanvas">
+            <!-- Hearts will be dynamically added here -->
+            
+            <!-- Basket (controlled by mouse) -->
+            <div class="basket" id="basket">
+                <div class="basket-handle"></div>
+                <div class="basket-body"></div>
+            </div>
+        </div>
+
+        <!-- Score Display -->
+        <div class="score-display">
+            <div class="score-item">
+                <span class="score-label">Hearts Caught:</span>
+                <span class="score-value" id="heartsCaught">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Hearts Missed:</span>
+                <span class="score-value missed" id="heartsMissed">0</span>
+            </div>
+        </div>
+
+        <!-- Love Letter Overlay (hidden initially) -->
+        <div class="love-letter-overlay" id="loveLetterOverlay">
+            <div class="love-letter">
+                <div class="letter-header">
+                    <h2>To My Dearest Love 💕</h2>
+                    <div class="hearts-decoration">
+                        <span>💝</span>
+                        <span>💖</span>
+                        <span>💝</span>
+                    </div>
+                </div>
+                <div class="letter-content" id="letterContent">
+                    <!-- Your love letter will be inserted here by your C backend -->
+	<p>My Ayuuu Yoon Yoon,</p>
+        <p>First of all, I am really sorry for acting like a child the other day.
+        <p>I just wanna thank you for accepting me again, and I promise that I will try my best
+        to make up for my mistakes.</p>
+        <p>You make me laugh, you make me think, and most importantly, 
+        you make me want to be a better person. Thank you for being 
+        my partner, my best friend, and my everything ayuuu.</p>
+        <p>I know you caught all the heart in this game just like you 	caught mine. </p>
+        <p>Happy Valentine's Day, my Boooo! Here's to many more
+        adventures together.</p>
+        <p class=\"letter-signature\">Forever yours,<br>Your [Stupid Boyfriend]💗💗💗</p>
+
+                </div>
+                <button class="close-letter-btn" id="closeLetterBtn">Close 💝</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

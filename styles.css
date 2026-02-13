@@ -1,0 +1,416 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive, sans-serif;
+    background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 50%, #ffd4e8 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Animated background hearts */
+body::before {
+    content: '💕 💝 💖 💗 ❤️ 💕 💝 💖';
+    position: absolute;
+    top: -100px;
+    left: 0;
+    right: 0;
+    font-size: 40px;
+    opacity: 0.1;
+    animation: floatHearts 20s linear infinite;
+    white-space: nowrap;
+}
+
+@keyframes floatHearts {
+    from {
+        transform: translateY(0) translateX(0);
+    }
+    to {
+        transform: translateY(calc(100vh + 100px)) translateX(100px);
+    }
+}
+
+/* Game Container */
+.game-container {
+    width: 90%;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+    border: 5px solid #ff69b4;
+}
+
+/* Header */
+.game-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.game-title {
+    font-size: 2.5em;
+    color: #ff1493;
+    text-shadow: 3px 3px 0px #ffb6d9;
+    margin-bottom: 10px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.game-subtitle {
+    font-size: 1.1em;
+    color: #ff69b4;
+    font-weight: bold;
+}
+
+/* Love Meter */
+.love-meter-container {
+    margin-bottom: 20px;
+}
+
+.love-meter-label {
+    font-size: 1.2em;
+    color: #ff1493;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.love-meter-bar {
+    width: 100%;
+    height: 40px;
+    background: #ffe0f0;
+    border-radius: 20px;
+    border: 4px solid #ff69b4;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.love-meter-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff1493 0%, #ff69b4 50%, #ffb6d9 100%);
+    border-radius: 20px;
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+}
+
+.love-meter-text {
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Game Canvas */
+.game-canvas {
+    width: 100%;
+    height: 450px;
+    background: linear-gradient(180deg, #e6f3ff 0%, #fff0f8 100%);
+    border-radius: 20px;
+    border: 4px solid #ff69b4;
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+    box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Basket */
+.basket {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 80px;
+    pointer-events: none;
+    transition: left 0.1s ease-out;
+    z-index: 100;
+}
+
+.basket-handle {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 30px;
+    border: 6px solid #d4a574;
+    border-bottom: none;
+    border-radius: 50% 50% 0 0;
+}
+
+.basket-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    height: 60px;
+    background: linear-gradient(180deg, #f4d7b0 0%, #d4a574 100%);
+    border-radius: 10px 10px 20px 20px;
+    border: 4px solid #b8935e;
+    box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.basket-body::before {
+    content: '🧺';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    opacity: 0.3;
+}
+
+/* Falling Hearts */
+.heart {
+    position: absolute;
+    font-size: 40px;
+    animation: fall linear, spin 2s ease-in-out infinite;
+    cursor: pointer;
+    user-select: none;
+    filter: drop-shadow(2px 2px 4px rgba(255, 105, 180, 0.4));
+}
+
+@keyframes fall {
+    from {
+        top: -60px;
+    }
+    to {
+        top: 100%;
+    }
+}
+
+@keyframes spin {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+}
+
+/* Heart catch animation */
+@keyframes heartCatch {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5) translateY(-20px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.heart.caught {
+    animation: heartCatch 0.5s ease-out forwards;
+}
+
+/* Score Display */
+.score-display {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding: 15px;
+    background: #ffe0f0;
+    border-radius: 15px;
+    border: 3px solid #ff69b4;
+}
+
+.score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.score-label {
+    font-size: 0.9em;
+    color: #ff1493;
+    font-weight: bold;
+}
+
+.score-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: #ff69b4;
+    text-shadow: 2px 2px 0px #ffb6d9;
+}
+
+.score-value.missed {
+    color: #ff6b9d;
+}
+
+/* Love Letter Overlay */
+.love-letter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 105, 180, 0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.love-letter-overlay.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.love-letter {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+    border: 5px solid #ff1493;
+    animation: slideIn 0.6s ease-out;
+    overflow-y: auto;
+}
+
+@keyframes slideIn {
+    from {
+        transform: scale(0.8) translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.letter-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 3px dashed #ff69b4;
+    padding-bottom: 20px;
+}
+
+.letter-header h2 {
+    font-size: 2em;
+    color: #ff1493;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px #ffb6d9;
+}
+
+.hearts-decoration {
+    font-size: 2em;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.letter-content {
+    font-family: 'Georgia', serif;
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #333;
+    text-align: left;
+}
+
+.letter-content p {
+    margin-bottom: 20px;
+}
+
+.letter-signature {
+    text-align: right;
+    font-style: italic;
+    color: #ff1493;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.close-letter-btn {
+    display: block;
+    margin: 30px auto 0;
+    padding: 15px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.close-letter-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+}
+
+.close-letter-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-title {
+        font-size: 2em;
+    }
+    
+    .game-canvas {
+        height: 350px;
+    }
+    
+    .basket {
+        width: 80px;
+        height: 60px;
+    }
+    
+    .basket-body {
+        width: 80px;
+        height: 50px;
+    }
+    
+    .heart {
+        font-size: 30px;
+    }
+    
+    .love-letter {
+        padding: 25px;
+    }
+}
